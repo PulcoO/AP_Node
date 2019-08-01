@@ -10,7 +10,7 @@ const actor = require('./routes/actor.route')
 ////////////////////////////////// ROUTEUR ///////////////////////////////////////
 
 app.use("/user", user);
-app.use("/actor", actor)
+app.use("/actor", actor);
 
 
 
