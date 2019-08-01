@@ -22,6 +22,6 @@ api.put('/id', actor_controller.actor_update);
 
 // RESTE A FAIRE // 
 
-// GET ONE BY NAME OR CITY OR COUNTRY //
+// GET ONE BY NAME OR CITY OR COUNTRY ?? //
 
-// GET MANY BU CATEGORIES //
+// GET MANY BU CATEGORIES ?? //
