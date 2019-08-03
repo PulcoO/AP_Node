@@ -12,11 +12,11 @@ const user_controller = require('../controllers/user.controller');
 //READ ALL //
 api.get('/', user_controller.user_details);
 //READ ONE //
-api.get('/:id', user_controller.user_getOne);
+api.get('/:userId', user_controller.user_getOne);
 //CREATE ONE //
-api.post('/create', user_controller.user_create);
+api.post('/', user_controller.user_create);
 //DELETE ONE //
-api.delete('/delete', user_controller.user_delete);
+api.delete('/:userId', user_controller.user_delete);
 
 
 module.exports = api;

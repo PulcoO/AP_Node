@@ -41,7 +41,7 @@ exports.user_details = function(req, res) {
 exports.user_getOne = function(req, res) {
     db.User.findOne({
             where: {
-                'id': req.params.id // params parce que dans l'url
+                'id': req.params.userId // params parce que dans l'url
             }
         })
         .then(users => {
@@ -58,11 +58,18 @@ exports.user_getOne = function(req, res) {
 
 exports.user_create = function(req, res) {
     db.User.create({
-            title: req.body.title,
-            content: req.body.content,
-            photo: req.body.photo,
-            authorId: req.body.author,
-            categoryId: req.body.category
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            pseudo: req.body.pseudo,
+            email: req.body.email,
+            birthdate: req.body.birthdate,
+            password: req.body.password,
+            adress: req.body.adress,
+            city: req.body.city,
+            cp: req.body.cp,
+            country: req.body.country,
+            roleId: 3
+
         })
         .then(users => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
@@ -79,7 +86,7 @@ exports.user_create = function(req, res) {
 exports.user_delete = function(req, res) {
     db.User.destroy({
             where: {
-                'id': req.params.id // params parce que dans l'url
+                'id': req.params.userId // params parce que dans l'url
             }
         })
         .then(users => {

@@ -1,25 +1,10 @@
-// IMPORT DE INDEX MODEL
+// IMPORT DE INDEX MODEL relation BDD
 const db = require('../models/index.js');
 
 // IMPORT DE JSONWEBTOKEN
 const jwt = require('jsonwebtoken');
 
-//Check to make sure header is not undefined, if so, return Forbidden (403)
-const checkToken = (req, res, next) => {
-    const header = req.headers['authorization'];
-
-    if (typeof header !== 'undefined') {
-        const bearer = header.split(' ');
-        const token = bearer[1];
-
-        req.token = token;
-        next();
-    } else {
-        //If header is undefined return Forbidden (403)
-        res.sendStatus(403)
-    }
-}
-
+////////////////////////////////////////////////////////////////
 exports.role_details = function(req, res) {
     db.Role.findAll({})
         .then(roles => {
@@ -37,7 +22,7 @@ exports.role_details = function(req, res) {
 exports.role_getOne = function(req, res) {
     db.Role.findOne({
             where: {
-                'id': req.params.id // params parce que dans l'url
+                'id': req.params.roleId // params parce que dans l'url
             }
         })
         .then(roles => {
@@ -86,5 +71,21 @@ exports.role_delete = function(req, res) {
             res.end();
         })
 }
-
-//rajout de update !!!!
+exports.role_update = function(req, res) {
+    db.Role.update({ // rajout de la fonction administrateur // rajout de la vérification country = city = geo
+            name: req.body.name,
+        }, {
+            where: { 'id': req.params.roleId }
+        })
+        .then(role => {
+            res.getHeader('Content-type', 'application/json ; charset=utf-8');
+            res.status(200);
+            res.json(role)
+        })
+        .catch(error => { // detailler l'erreur si plusieurs possibilité
+            res.getHeader('Content-type', 'application/json ; charset=utf-8');
+            res.status(400);
+            console.log('error');
+            res.end();
+        })
+}
