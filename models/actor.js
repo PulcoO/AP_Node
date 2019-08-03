@@ -26,9 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         });
 
 
-        Actor.hasMany(models.Category, {
-            trough: 'ActorAsCategory',
-            foreignKey: "actorId"
+        Actor.belongsToMany(models.Category, {
+            through: 'ActorAsCategory',
+            foreignKey: "actorId",
+            as: 'Category'
         });
     };
     return Actor;

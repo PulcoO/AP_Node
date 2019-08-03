@@ -25,3 +25,5 @@ api.put('/id', actor_controller.actor_update);
 // GET ONE BY NAME OR CITY OR COUNTRY ?? //
 
 // GET MANY BU CATEGORIES ?? //
+
+module.exports = api;

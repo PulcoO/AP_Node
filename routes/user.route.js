@@ -1,6 +1,6 @@
 let express = require('express');
 let api = express.Router();
-let db = require(`../models/index.js`);
+//let db = require(`../models/index.js`);
 
 
 
@@ -17,3 +17,6 @@ api.get('/:id', user_controller.user_getOne);
 api.post('/create', user_controller.user_create);
 //DELETE ONE //
 api.delete('/delete', user_controller.user_delete);
+
+
+module.exports = api;

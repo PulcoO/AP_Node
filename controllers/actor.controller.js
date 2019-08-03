@@ -5,13 +5,6 @@
 // INITIALISATION DE L INDEX DES MODELS 
 const db = require('../models/index.js');
 
-/////////////////////// BODY PARSER /////////////////////////////
-let bodyParser = require('body-parser');
-
-//configuration body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
 /////////////////////////web tokken/////////////////////////
 const jwt = require('jsonwebtoken');
 //Check to make sure header is not undefined, if so, return Forbidden (403)
@@ -67,12 +60,12 @@ exports.actor_getOne = function(req, res) {
 exports.actor_create = function(req, res) {
     db.Actor.create({
             name: req.body.name,
-            geo: req.body.geo,
+            geoLongitude: req.body.geoLongitude,
+            geoLatitude: req.body.geoLatitude,
             adress: req.body.adress,
             city: req.body.city,
             cp: req.body.cp,
             country: req.body.country,
-            category: req.body.category,
             website: req.body.website,
             description: req.body.description,
             telephonnumber: req.body.telephonnumber,
@@ -111,12 +104,12 @@ exports.actor_delete = function(req, res) {
 exports.actor_update = function(req, res) {
     db.Actor.update({ // rajout de la fonction administrateur // rajout de la vérification country = city = geo
             name: req.body.name,
-            geo: req.body.geo,
+            geoLongitude: req.body.geoLongitude,
+            geoLatitude: req.body.geoLatitude,
             adress: req.body.adress,
             city: req.body.city,
             cp: req.body.cp,
             country: req.body.country,
-            category: req.body.category,
             website: req.body.website,
             description: req.body.description,
             telephonnumber: req.body.telephonnumber,

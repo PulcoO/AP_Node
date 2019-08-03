@@ -9,6 +9,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             actorId: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Actors",
@@ -16,6 +17,7 @@ module.exports = {
                 }
             },
             categoryId: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Categories",
