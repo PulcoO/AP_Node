@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
         Actor.belongsToMany(models.Category, {
             through: 'ActorAsCategory',
             foreignKey: "actorId",
-            as: 'Category'
+            otherKey: "categoryId",
+            as: 'categories'
         });
     };
     return Actor;

@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
         Category.belongsToMany(models.Actor, {
             through: 'ActorAsCategory',
             foreignKey: "categoryId",
-            as: "actor"
+            otherKey: "actorId",
+            as: "actors"
         });
     };
     return Category;

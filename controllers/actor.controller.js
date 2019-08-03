@@ -71,10 +71,30 @@ exports.actor_create = function(req, res) {
             telephonnumber: req.body.telephonnumber,
             openhours: req.body.openhours
         })
-        .then(actors => {
+        .then((actor) => {
+            console.log(actor),
+                console.log(req.body.categories)
+            db.Category.findAll({
+                    where: { id: [req.body.categories] },
+                    as: ['categories'],
+                    include: ['actors.id']
+                })
+                .then((categories) => {
+                    categories.forEach(category => {
+                        console.log(category)
+                        category.setactors(categories)
+                            .then((joinedActorsCategories) => {
+                                console.log(joinedActorsCategories)
+                            })
+                    })
+
+
+                })
+        })
+        .then(actor => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
-            res.json(actors);
+            res.json(actor);
         })
         .catch(error => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
