@@ -6,10 +6,15 @@ let models = require("../models");
 function user_create(req, res) {
     console.log(req.body);
     //params
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let pseudo = req.body.pseudo;
     let email = req.body.email;
-    let username = req.body.username;
     let password = req.body.password;
-    let bio = req.body.bio;
+    let adress = req.body.adress;
+    let cp = req.body.cp;
+    let country = req.body.country;
+    let roleId = req.body.roleId;
 
     if (email == null || username == null || password == null) {
         return res.status(400).json({
@@ -27,11 +32,15 @@ function user_create(req, res) {
             if (!userFound) {
                 bcrypt.hash(password, 5, function (err, bcryptedPassword) {
                     models.User.create({
+                            firstname: firstname,
+                            lastname: lastname,
+                            pseudo: pseudo,
                             email: email,
-                            username: username,
                             password: bcryptedPassword,
-                            bio: bio,
-                            isAdmin: 0
+                            adress: adress,
+                            cp: cp,
+                            country: country,
+                            roleId: roleId
                         })
                         .then(function (newUser) {
                             return res.status(201).json({
@@ -162,63 +171,3 @@ module.exports = {
     user_getOne,
     user_delete
 }
-
-
-
-
-// exports.user_getOne = function (req, res) {
-//     db.User.findOne({
-//             where: {
-//                 'id': req.params.id // params parce que dans l'url
-//             }
-//         })
-//         .then(users => {
-//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
-//             res.status(200);
-//             res.json(users);
-
-//         })
-//         .catch(error => {
-//             res.json(error);
-//             res.end();
-//         })
-// }
-
-// exports.user_create = function (req, res) {
-//     db.User.create({
-//             title: req.body.title,
-//             content: req.body.content,
-//             photo: req.body.photo,
-//             authorId: req.body.author,
-//             categoryId: req.body.category
-//         })
-//         .then(users => {
-//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
-//             res.status(200);
-//             res.json(users);
-//         })
-//         .catch(error => {
-//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
-//             res.status(400);
-//             console.log(error);
-//         })
-// }
-
-// exports.user_delete = function (req, res) {
-//     db.User.destroy({
-//             where: {
-//                 'id': req.params.id // params parce que dans l'url
-//             }
-//         })
-//         .then(users => {
-//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
-//             res.status(200);
-//             res.json(users)
-//         })
-//         .catch(error => {
-//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
-//             res.status(400);
-//             console.log(error);
-//             res.end();
-//         })
-// }

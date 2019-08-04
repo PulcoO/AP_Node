@@ -18,10 +18,7 @@
   "homepage": "https://github.com/PulcoO/AstonProjet_Node#readme",
   "dependencies": {
     "bcrypt": "^3.0.6",
-<<<<<<< HEAD
     "cors": "^2.8.5",
-=======
->>>>>>> 44478f63a39ee8a1f67f872a5896b0a1e505cff0
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.6.5",
