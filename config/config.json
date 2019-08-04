@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "development": {
     "username": "root",
     "password": "",
@@ -24,29 +23,3 @@
     "operatorsAliases": false
   }
 }
-=======
-    "development": {
-        "username": "root",
-        "password": "root",
-        "database": "projettestmigrate",
-        "host": "127.0.0.1",
-        "dialect": "mysql"
-    },
-    "test": {
-        "username": "root",
-        "password": null,
-        "database": "database_test",
-        "host": "127.0.0.1",
-        "dialect": "mysql",
-        "operatorsAliases": false
-    },
-    "production": {
-        "username": "root",
-        "password": null,
-        "database": "database_production",
-        "host": "127.0.0.1",
-        "dialect": "mysql",
-        "operatorsAliases": false
-    }
-}
->>>>>>> 44478f63a39ee8a1f67f872a5896b0a1e505cff0

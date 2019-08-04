@@ -1,6 +1,7 @@
 let bcrypt = require("bcrypt");
 let jwtUtils = require("../utils/jwt.utils");
 let models = require("../models");
+let db = require("../models/index");
 
 // User function 
 function user_create(req, res) {
@@ -10,13 +11,14 @@ function user_create(req, res) {
     let lastname = req.body.lastname;
     let pseudo = req.body.pseudo;
     let email = req.body.email;
+    let birthdate = req.body.birthdate;
     let password = req.body.password;
     let adress = req.body.adress;
     let cp = req.body.cp;
+    let city = req.body.city;
     let country = req.body.country;
-    let roleId = req.body.roleId;
 
-    if (email == null || username == null || password == null) {
+    if (email == null || pseudo == null || password == null) {
         return res.status(400).json({
             error: "missing parameters"
         });
@@ -36,11 +38,12 @@ function user_create(req, res) {
                             lastname: lastname,
                             pseudo: pseudo,
                             email: email,
+                            birthdate: birthdate,
                             password: bcryptedPassword,
                             adress: adress,
                             cp: cp,
+                            city: city,
                             country: country,
-                            roleId: roleId
                         })
                         .then(function (newUser) {
                             return res.status(201).json({
