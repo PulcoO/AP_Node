@@ -119,7 +119,7 @@ function user_details(req, res) {
 function user_getOne(req, res) {
     db.User.findOne({
             where: {
-                'id': req.params.id // params parce que dans l'url
+                'id': req.params.userId // params parce que dans l'url
             }
         })
         .then(users => {
@@ -137,7 +137,7 @@ function user_getOne(req, res) {
 function user_delete(req, res) {
     db.User.destroy({
             where: {
-                'id': req.params.id // params parce que dans l'url
+                'id': req.params.userId // params parce que dans l'url
             }
         })
         .then(users => {

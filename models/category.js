@@ -1,14 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define('Category', {
-    name: DataTypes.STRING
-  }, {});
-  Category.associate = function(models) {
-    // associations can be defined here
-    Category.hasMany(models.Actor,{
-      trough:'ActorAsCategory',
-      foreignKey: "categoryId"
-    });
-  };
-  return Category;
+    const Category = sequelize.define('Category', {
+        name: DataTypes.STRING
+    }, {});
+    Category.associate = function(models) {
+        // associations can be defined here
+        Category.belongsToMany(models.Actor, {
+            through: 'ActorAsCategory',
+            foreignKey: "categoryId",
+            otherKey: "actorId",
+            as: "actors"
+        });
+    };
+    return Category;
 };
