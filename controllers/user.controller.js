@@ -1,44 +1,122 @@
-const db = require('../models/index.js');
+let bcrypt = require("bcrypt");
+let jwtUtils = require("../utils/jwt.utils");
+let models = require("../models");
 
-/////////////////////////config du haschage via npm install bcrypt/////////////////////////
+// User function 
+function user_create(req, res) {
+    console.log(req.body);
+    //params
+    let email = req.body.email;
+    let username = req.body.username;
+    let password = req.body.password;
+    let bio = req.body.bio;
 
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-/////////////////////////web tokken/////////////////////////
-const jwt = require('jsonwebtoken');
-//Check to make sure header is not undefined, if so, return Forbidden (403)
-const checkToken = (req, res, next) => {
-    const header = req.headers['authorization'];
-
-    if (typeof header !== 'undefined') {
-        const bearer = header.split(' ');
-        const token = bearer[1];
-
-        req.token = token;
-        next();
-    } else {
-        //If header is undefined return Forbidden (403)
-        res.sendStatus(403)
+    if (email == null || username == null || password == null) {
+        return res.status(400).json({
+            error: "missing parameters"
+        });
     }
+
+    models.User.findOne({
+            attributes: ["email"],
+            where: {
+                email: email
+            }
+        })
+        .then(function (userFound) {
+            if (!userFound) {
+                bcrypt.hash(password, 5, function (err, bcryptedPassword) {
+                    models.User.create({
+                            email: email,
+                            username: username,
+                            password: bcryptedPassword,
+                            bio: bio,
+                            isAdmin: 0
+                        })
+                        .then(function (newUser) {
+                            return res.status(201).json({
+                                userId: newUser.id
+                            });
+                        })
+                        .catch(function () {
+                            return res.status(500).json({
+                                error: "cannot add user"
+                            });
+                        });
+                });
+            } else {
+                return res.status(409).json({
+                    error: "user already exist"
+                });
+            }
+        })
+        .catch(function () {
+            return res.status(500).json({
+                error: "unable to verify user"
+            });
+        });
 }
 
+function user_login(req, res) {
+    //params
+    let email = req.body.email;
+    let password = req.body.password;
 
-exports.user_details = function(req, res) {
-    db.User.findAll({})
+    if (email == null || password == null) {
+        return res.status(400).json({
+            error: "missing parameters"
+        });
+    }
+
+    models.User.findOne({
+            where: {
+                email: email
+            }
+        })
+        .then(function (userFound) {
+            if (userFound) {
+                bcrypt.compare(password, userFound.password, function (
+                    errBycrypt,
+                    resBycrypt
+                ) {
+                    if (resBycrypt) {
+                        return res.status(200).json({
+                            userId: userFound.id,
+                            token: jwtUtils.generateTokenForUser(userFound)
+                        });
+                    } else {
+                        return res.status(403).json({
+                            error: "invalid password"
+                        });
+                    }
+                });
+            } else {
+                return res.status(404).json({
+                    error: "user not exist in DB"
+                });
+            }
+        })
+        .catch(function () {
+            return res.status(500).json({
+                error: "unable to verify user"
+            });
+        });
+}
+
+function user_details(req, res) {
+    models.User.findAll({})
         .then(users => {
-            res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
             res.json(users);
-
+            res.end();
         })
         .catch(error => {
             res.json(error);
             res.end();
-        })
+        });
 }
 
-exports.user_getOne = function(req, res) {
+function user_getOne(req, res) {
     db.User.findOne({
             where: {
                 'id': req.params.id // params parce que dans l'url
@@ -56,27 +134,7 @@ exports.user_getOne = function(req, res) {
         })
 }
 
-exports.user_create = function(req, res) {
-    db.User.create({
-            title: req.body.title,
-            content: req.body.content,
-            photo: req.body.photo,
-            authorId: req.body.author,
-            categoryId: req.body.category
-        })
-        .then(users => {
-            res.getHeader('Content-type', 'application/json ; charset=utf-8');
-            res.status(200);
-            res.json(users);
-        })
-        .catch(error => {
-            res.getHeader('Content-type', 'application/json ; charset=utf-8');
-            res.status(400);
-            console.log(error);
-        })
-}
-
-exports.user_delete = function(req, res) {
+function user_delete(req, res) {
     db.User.destroy({
             where: {
                 'id': req.params.id // params parce que dans l'url
@@ -93,4 +151,74 @@ exports.user_delete = function(req, res) {
             console.log(error);
             res.end();
         })
+
 }
+
+//module exports
+module.exports = {
+    user_create,
+    user_details,
+    user_login,
+    user_getOne,
+    user_delete
+}
+
+
+
+
+// exports.user_getOne = function (req, res) {
+//     db.User.findOne({
+//             where: {
+//                 'id': req.params.id // params parce que dans l'url
+//             }
+//         })
+//         .then(users => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(200);
+//             res.json(users);
+
+//         })
+//         .catch(error => {
+//             res.json(error);
+//             res.end();
+//         })
+// }
+
+// exports.user_create = function (req, res) {
+//     db.User.create({
+//             title: req.body.title,
+//             content: req.body.content,
+//             photo: req.body.photo,
+//             authorId: req.body.author,
+//             categoryId: req.body.category
+//         })
+//         .then(users => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(200);
+//             res.json(users);
+//         })
+//         .catch(error => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(400);
+//             console.log(error);
+//         })
+// }
+
+// exports.user_delete = function (req, res) {
+//     db.User.destroy({
+//             where: {
+//                 'id': req.params.id // params parce que dans l'url
+//             }
+//         })
+//         .then(users => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(200);
+//             res.json(users)
+//         })
+//         .catch(error => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(400);
+//             console.log(error);
+//             res.end();
+//         })
+// }
