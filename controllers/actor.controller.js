@@ -72,26 +72,19 @@ exports.actor_create = function(req, res) {
             openhours: req.body.openhours
         })
         .then((actor) => {
-            console.log(actor),
-                console.log(req.body.categories)
-            db.Category.findAll({
-                    where: { id: [req.body.categories] },
-                    as: ['categories'],
-                    include: ['actors.id']
+            return actor;
+        })
+        .then((actor) => {
+            req.body.categories.split(',').forEach(category => {
+                db.ActorAsCategory.BulkCreate({
+                    actorId: actor.id,
+                    categoryId: category,
                 })
-                .then((categories) => {
-                    categories.forEach(category => {
-                        console.log(category)
-                        category.setactors(categories)
-                            .then((joinedActorsCategories) => {
-                                console.log(joinedActorsCategories)
-                            })
-                    })
-
-
-                })
+            });
+            return actor;
         })
         .then(actor => {
+            console.log(req.body.categories.split(','))
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
             res.json(actor);
