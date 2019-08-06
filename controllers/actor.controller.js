@@ -70,21 +70,18 @@ exports.actor_create = function(req, res) {
             description: req.body.description,
             telephonnumber: req.body.telephonnumber,
             openhours: req.body.openhours
+            
         })
         .then((actor) => {
-            return actor;
-        })
-        .then((actor) => {
-            req.body.categories.split(',').forEach(category => {
-                db.ActorAsCategory.BulkCreate({
-                    actorId: actor.id,
-                    categoryId: category,
+            req.body.categories.split(',').forEach(category =>{
+                db.ActorAsCategory.create({
+                    actorId : actor.id,
+                    categoryId: category
                 })
-            });
-            return actor;
+            })
+            return actor
         })
         .then(actor => {
-            console.log(req.body.categories.split(','))
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
             res.json(actor);
@@ -93,7 +90,7 @@ exports.actor_create = function(req, res) {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(400);
             console.log(error);
-        })
+        })  
 }
 
 exports.actor_delete = function(req, res) {
