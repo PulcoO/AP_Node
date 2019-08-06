@@ -26,7 +26,14 @@ const checkToken = (req, res, next) => {
 //export
 
 exports.actor_details = function(req, res) {
-    db.Actor.findAll({})
+    db.Actor.findAll({
+        include: [{
+            model:Category, as: 'categories',
+            attributes: ['name'],
+            through: {
+                attributes: ['actorId','categoryId'],
+            }
+        }]
         .then(actors => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
@@ -37,7 +44,9 @@ exports.actor_details = function(req, res) {
             res.json(error);
             res.end();
         })
-}
+    })
+        
+};
 
 exports.actor_getOne = function(req, res) {
     db.Actor.findOne({
@@ -70,7 +79,6 @@ exports.actor_create = function(req, res) {
             description: req.body.description,
             telephonnumber: req.body.telephonnumber,
             openhours: req.body.openhours
-            
         })
         .then((actor) => {
             req.body.categories.split(',').forEach(category =>{
