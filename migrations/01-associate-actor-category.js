@@ -17,10 +17,17 @@ module.exports = {
         ActorId: {
           type: Sequelize.UUID,
           primaryKey: true,
+          references:{
+            model: 'Actor',
+            key: 'id'
+
+          }
         },
         CategoryId: {
           type: Sequelize.UUID,
           primaryKey: true,
+          references: 'Category',
+          key: 'id'
         },
       }
     );
