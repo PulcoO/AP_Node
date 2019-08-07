@@ -41,6 +41,13 @@ module.exports = {
             openhours: {
                 type: Sequelize.STRING
             },
+            // actorId: {
+            //     type: Sequelize.INTEGER,
+            //     references: {
+            //         model: "actorscategories",
+            //         key: "ActorId"
+            //     }
+            // },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
