@@ -82,17 +82,16 @@ exports.actor_create = function(req, res) {
         })
         .then((actor) => {
             req.body.categories.split(',').forEach(category =>{
-                db.ActorAsCategory.create({
-                    actorId : actor.id,
-                    categoryId: category
+                db.CategoryActor.create({
+                    categoryId: category,
                 })
             })
-            return actor
+            return actorwithcat
         })
-        .then(actor => {
+        .then(actorwhithcat => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
-            res.json(actor);
+            res.json(actorwhithcat);
         })
         .catch(error => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');

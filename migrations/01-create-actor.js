@@ -41,13 +41,6 @@ module.exports = {
             openhours: {
                 type: Sequelize.STRING
             },
-            // actorId: {
-            //     type: Sequelize.INTEGER,
-            //     references: {
-            //         model: "actorscategories",
-            //         key: "ActorId"
-            //     }
-            // },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
@@ -56,8 +49,13 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             }
-        });
+        },
+        {
+            freezeTableName: true
+        }
+    );
     },
+    
     down: (queryInterface, Sequelize) => {
         return queryInterface.dropTable('Actors');
     }

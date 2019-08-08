@@ -11,13 +11,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      // categoryId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //       model: "actorscategories",
-      //       key: "CategoryId"
-      //   }
-      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -26,7 +19,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    },
+  );
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Categories');
