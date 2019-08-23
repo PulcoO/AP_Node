@@ -19,6 +19,7 @@ const user = require('./routes/user.route');
 const actor = require('./routes/actor.route');
 const role = require('./routes/role.route');
 const category = require('./routes/category.route');
+const favori = require('./routes/favori.route');
 
 ////////////////////////////////// ROUTEUR ///////////////////////////////////////
 
@@ -26,6 +27,7 @@ app.use("/user", user);
 app.use("/actor", actor);
 app.use("/role", role);
 app.use("/category", category);
+app.use("/favori",favori);
 
 ///////////////////////////////// LISTENER ///////////////////////////////////////
 app.listen(9090);

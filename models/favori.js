@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
   Favori.associate = function(models) {
     // associations can be defined here
     Favori.belongsTo(models.User,{
-      foreignKey: "UserId"
+      foreignKey: "userId"
     });
     Favori.belongsTo(models.Actor,{
-      foreignKey: "ActorId"
+      foreignKey: "actorId"
     });
   };
   return Favori;

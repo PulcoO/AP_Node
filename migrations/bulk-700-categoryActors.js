@@ -57,6 +57,24 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
+            {
+                actorId: 3,
+                categoryId: 1,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                actorId: 3,
+                categoryId: 4,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                actorId: 3,
+                categoryId: 7,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
         ]
             // ,{individualHooks: true}
         );

@@ -23,17 +23,17 @@ const checkToken = (req, res, next) => {
     }
 }
 
-//export
 
+let category = db.Actor.belongsToMany(db.Category, {
+    through: 'CategoryActor',
+    as : 'category',
+    fields : ['id', 'name']
+
+});
 exports.actor_details = function(req, res) {
     db.Actor.findAll({
-        include: [{
-            model:Category, as: 'categories',
-            attributes: ['name'],
-            through: {
-                attributes: ['actorId','categoryId'],
-            }
-        }]
+        include: [category],
+    })
         .then(actors => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
@@ -44,7 +44,7 @@ exports.actor_details = function(req, res) {
             res.json(error);
             res.end();
         })
-    })
+    
         
 };
 
