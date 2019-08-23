@@ -9,14 +9,15 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             firstname: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.STRING
             },
             lastname: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.STRING
             },
             pseudo: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             email: {
@@ -24,6 +25,7 @@ module.exports = {
                 type: Sequelize.STRING
             },
             birthdate: {
+                allowNull: true,
                 type: Sequelize.DATE
             },
             password: {
@@ -31,18 +33,27 @@ module.exports = {
                 type: Sequelize.STRING
             },
             adress: {
+                allowNull: true,
                 type: Sequelize.STRING
             },
             city: {
+                allowNull: true,
                 type: Sequelize.STRING
             },
             cp: {
+                allowNull: true,
                 type: Sequelize.STRING
             },
             country: {
+                allowNull: true,
+                type: Sequelize.STRING
+            },
+            image: {
+                allowNull: true,
                 type: Sequelize.STRING
             },
             roleId: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 references: {
                     model: "Roles",

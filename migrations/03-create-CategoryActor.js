@@ -4,7 +4,6 @@ module.exports = {
     return queryInterface.createTable('CategoryActors', {
       actorId: {
         type: Sequelize.INTEGER,
-        field: "actor_id",
         references: {
           model: "Actors",
           key: "id"
@@ -12,7 +11,6 @@ module.exports = {
       },
       categoryId: {
         type: Sequelize.INTEGER,
-        field: "category_id",
         references: {
           model: "Categories",
           key: "id"
@@ -20,11 +18,14 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+	      onUpdate : Sequelize.literal('CURRENT_TIMESTAMP'),
       }
     },
   );

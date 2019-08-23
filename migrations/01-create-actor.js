@@ -50,9 +50,6 @@ module.exports = {
                 type: Sequelize.DATE
             }
         },
-        {
-            freezeTableName: true
-        }
     );
     },
     
