@@ -9,37 +9,58 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             name: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             geoLongitude: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             geoLatitude: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             adress: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             city: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             cp: {
-                type: Sequelize.STRING
+                allowNull: true,
+                type: Sequelize.STRING,
+                defaultValue:
+                    'Non disponible pour le moment'
             },
             country: {
+                allowNull: false,
                 type: Sequelize.STRING
             },
             website: {
+                allowNull: true,
                 type: Sequelize.STRING
             },
             description: {
-                type: Sequelize.STRING
+                allowNull: true,
+                type: Sequelize.STRING,
+                defaultValue:
+                    'Non disponible pour le moment'
             },
             telephonnumber: {
+                allowNull: true,
                 type: Sequelize.INTEGER
             },
             openhours: {
+                allowNull: true,
                 type: Sequelize.STRING
+            },
+            image: {
+                allowNull: true,
+                type: Sequelize.STRING,
+                defaultValue: 
+                    ''
             },
             createdAt: {
                 allowNull: false,

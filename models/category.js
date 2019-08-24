@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     Category.associate = function(models) {
         // associations can be defined here
         Category.belongsToMany(models.Actor, {
-            through: 'CategoryActor'            
+            through: 'CategoryActor',
+            foreignKey: 'categoryId',
+            otherKey: 'actorId'          
         });
     };
     return Category;

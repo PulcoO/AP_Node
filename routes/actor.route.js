@@ -17,10 +17,11 @@ api.delete('/', actor_controller.actor_delete);
 //UPDATE ONE // 
 api.put('/:actorId', actor_controller.actor_update);
 
+//READ ALL BY CATEGORY//
+api.get('/category/:categoryId', actor_controller.actor_details_sort_by_category_with_favori);
+
 // RESTE A FAIRE // 
 
 // GET ONE BY NAME OR CITY OR COUNTRY ?? //
-
-// GET MANY BU CATEGORIES ?? //
 
 module.exports = api;

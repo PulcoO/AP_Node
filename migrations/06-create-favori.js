@@ -8,13 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.STRING
-      },
-      actorId: {
-        type: Sequelize.STRING
-      },
+      // userId: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING
+      // },
+      // actorId: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING
+      // },
       userId:{
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "users",
@@ -22,6 +25,7 @@ module.exports = {
         }
       },
       actorId:{
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "actors",

@@ -8,8 +8,10 @@ const category_controller = require('../controllers/category.controller');
 
 //READ ALL //
 api.get('/', category_controller.category_details);
+//READ ALL INCLUDE ACTORS//
+api.get('/:categoryId', category_controller.category_details_sort_by_actor);
 //READ ONE //
-api.get('/:categoryId', category_controller.category_getOne);
+//api.get('/:categoryId', category_controller.category_getOne);
 //CREATE ONE //
 api.post('/', category_controller.category_create);
 //DELETE ONE //

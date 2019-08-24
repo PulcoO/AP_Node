@@ -23,13 +23,21 @@ const checkToken = (req, res, next) => {
     }
 }
 
+// INITIALISATION DE SEQUELIZE
+let Sequelize = require ('sequelize');
+let Op = Sequelize.Op;
 
 let category = db.Actor.belongsToMany(db.Category, {
     through: 'CategoryActor',
-    as : 'category',
-    fields : ['id', 'name']
-
+    as : 'category'
 });
+
+let favori = db.Favori.belongsTo(db.Actor,{
+    foreignKey : "actorId",
+    as : 'favori'
+});
+let user = db.User;
+
 exports.actor_details = function(req, res) {
     db.Actor.findAll({
         include: [category],
@@ -43,9 +51,7 @@ exports.actor_details = function(req, res) {
         .catch(error => {
             res.json(error);
             res.end();
-        })
-    
-        
+        })      
 };
 
 exports.actor_getOne = function(req, res) {
@@ -146,3 +152,35 @@ exports.actor_update = function(req, res) {
             res.end();
         })
 }
+////////////////////////////////////////////////////////////////////////////////
+///                              LES SPECIFIQUES                             ///
+////////////////////////////////////////////////////////////////////////////////
+
+exports.actor_details_sort_by_category_with_favori = function(req, res) {
+    let categoryParams= req.params.categoryId.split("-");
+    db.Actor.findAll({
+        include: 
+            [
+                {
+                    model : db.Category ,
+                    where : {'id': {[Op.in]: categoryParams }},
+                    attributes :['id', 'name'],
+                    required: false,
+                },{
+                    model : db.Favori,
+                    attributes :['actorId', 'userId'],
+                    required: false,
+                },
+            ],
+        })
+        .then(actors => {
+            res.getHeader('Content-type', 'application/json ; charset=utf-8');
+            res.status(200);
+            res.json(actors);
+
+        })
+        .catch(error => {
+            res.json(error);
+            res.end();
+        })      
+};

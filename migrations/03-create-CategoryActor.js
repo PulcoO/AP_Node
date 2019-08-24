@@ -3,16 +3,18 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('CategoryActors', {
       actorId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Actors",
+          model: "actors",
           key: "id"
         }
       },
       categoryId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Categories",
+          model: "categories",
           key: "id"
         }
       },

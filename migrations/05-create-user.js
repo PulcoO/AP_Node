@@ -50,7 +50,8 @@ module.exports = {
             },
             image: {
                 allowNull: true,
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                defaultValue: ''
             },
             roleId: {
                 allowNull: false,

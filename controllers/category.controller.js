@@ -9,15 +9,38 @@ const db = require('../models/index.js');
 let Sequelize = require ('sequelize');
 let Op = Sequelize.Op;
 
-//export
+// INITIALIZATION DES RELATIONS
 
+let actors = db.Actor.belongsToMany(db.Category, {
+    through: 'CategoryActor',
+    as : 'Actor',
+});
+
+//export
 exports.category_details = function(req, res) {
+    console.log(req.params.categoryId)
+    db.Category.findAll({})
+        .then(categories => {
+            res.getHeader('Content-type', 'application/json ; charset=utf-8');
+            res.status(200);
+            res.json(categories);
+
+        })
+        .catch(error => {
+            res.json(error);
+            res.end();
+        })
+}
+
+exports.category_details_sort_by_actor = function(req, res) {
+    console.log(req.params.categoryId)
     db.Category.findAll({
         where : {
             'id': {
                 [Op.in]: req.params.categoryId.split("-")
-            }
-        }
+            } 
+        },
+        include: [actors]
     })
         .then(categories => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
@@ -31,23 +54,23 @@ exports.category_details = function(req, res) {
         })
 }
 
-exports.category_getOne = function(req, res) {
-    db.Category.findOne({
-            where: {
-                'id': req.params.categoryId // params parce que dans l'url
-            }
-        })
-        .then(category => {
-            res.getHeader('Content-type', 'application/json ; charset=utf-8');
-            res.status(200);
-            res.json(category);
+// exports.category_getOne = function(req, res) {
+//     db.Category.findOne({
+//             where: {
+//                 'id': req.params.categoryId // params parce que dans l'url
+//             }
+//         })
+//         .then(category => {
+//             res.getHeader('Content-type', 'application/json ; charset=utf-8');
+//             res.status(200);
+//             res.json(category);
 
-        })
-        .catch(error => {
-            res.json(error);
-            res.end();
-        })
-}
+//         })
+//         .catch(error => {
+//             res.json(error);
+//             res.end();
+//         })
+// }
 
 exports.category_create = function(req, res) {
     db.Category.create({

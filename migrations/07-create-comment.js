@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       userId:{
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
@@ -20,6 +22,7 @@ module.exports = {
         }
       },
       actorId:{
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Actors",

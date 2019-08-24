@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         website: DataTypes.STRING,
         description: DataTypes.STRING,
         telephonnumber: DataTypes.INTEGER,
-        openhours: DataTypes.STRING
+        openhours: DataTypes.STRING,
+        image: DataTypes.STRING,
     }, {});
     Actor.associate = function(models) {
         // associations can be defined here
@@ -27,7 +28,9 @@ module.exports = (sequelize, DataTypes) => {
 
 
         Actor.belongsToMany(models.Category, {
-            through: 'CategoryActor'
+            through: 'CategoryActor',
+            foreignKey: 'actorId',
+            otherKey: 'categoryId'
         });
     };
     return Actor;
