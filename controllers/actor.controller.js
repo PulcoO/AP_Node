@@ -23,10 +23,17 @@ const checkToken = (req, res, next) => {
     }
 }
 
-//export
 
+let category = db.Actor.belongsToMany(db.Category, {
+    through: 'CategoryActor',
+    as : 'category',
+    fields : ['id', 'name']
+
+});
 exports.actor_details = function(req, res) {
-    db.Actor.findAll({})
+    db.Actor.findAll({
+        include: [category],
+    })
         .then(actors => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
@@ -37,7 +44,9 @@ exports.actor_details = function(req, res) {
             res.json(error);
             res.end();
         })
-}
+    
+        
+};
 
 exports.actor_getOne = function(req, res) {
     db.Actor.findOne({
@@ -72,35 +81,23 @@ exports.actor_create = function(req, res) {
             openhours: req.body.openhours
         })
         .then((actor) => {
-            console.log(actor),
-                console.log(req.body.categories)
-            db.Category.findAll({
-                    where: { id: [req.body.categories] },
-                    as: ['categories'],
-                    include: ['actors.id']
+            req.body.categories.split(',').forEach(category =>{
+                db.CategoryActor.create({
+                    categoryId: category,
                 })
-                .then((categories) => {
-                    categories.forEach(category => {
-                        console.log(category)
-                        category.setactors(categories)
-                            .then((joinedActorsCategories) => {
-                                console.log(joinedActorsCategories)
-                            })
-                    })
-
-
-                })
+            })
+            return actorwithcat
         })
-        .then(actor => {
+        .then(actorwhithcat => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
-            res.json(actor);
+            res.json(actorwhithcat);
         })
         .catch(error => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(400);
             console.log(error);
-        })
+        })  
 }
 
 exports.actor_delete = function(req, res) {

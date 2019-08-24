@@ -1,35 +1,30 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Events', {
+    return queryInterface.createTable('Favoris', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      userId: {
         type: Sequelize.STRING
       },
-      content: {
+      actorId: {
         type: Sequelize.STRING
       },
-      datebegin: {
-        type: Sequelize.DATE
-      },
-      dateend: {
-        type: Sequelize.DATE
-      },
-      location: {
-        type: Sequelize.STRING
-      },
-      openhours: {
-        type: Sequelize.STRING
+      userId:{
+        type: Sequelize.INTEGER,
+        references: {
+          model: "users",
+          key: "id"
+        }
       },
       actorId:{
         type: Sequelize.INTEGER,
         references: {
-          model: "Actors",
+          model: "actors",
           key: "id"
         }
       },
@@ -44,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Events');
+    return queryInterface.dropTable('Favoris');
   }
 };

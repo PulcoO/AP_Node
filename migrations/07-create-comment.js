@@ -1,17 +1,15 @@
+
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Favoris', {
+    return queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.STRING
-      },
-      actorId: {
+      content: {
         type: Sequelize.STRING
       },
       userId:{
@@ -39,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Favoris');
+    return queryInterface.dropTable('Comments');
   }
 };
