@@ -5,10 +5,20 @@
 // INITIALISATION DE L INDEX DES MODELS 
 const db = require('../models/index.js');
 
+// INITIALISATION DE SEQUELIZE
+let Sequelize = require ('sequelize');
+let Op = Sequelize.Op;
+
 //export
 
 exports.category_details = function(req, res) {
-    db.Category.findAll({})
+    db.Category.findAll({
+        where : {
+            'id': {
+                [Op.in]: req.params.categoryId.split("-")
+            }
+        }
+    })
         .then(categories => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
