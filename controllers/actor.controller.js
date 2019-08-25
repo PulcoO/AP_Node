@@ -40,7 +40,18 @@ let user = db.User;
 
 exports.actor_details = function(req, res) {
     db.Actor.findAll({
-        include: [category],
+        include: 
+            [
+                {
+                    model : db.Category ,
+                    attributes :['id', 'name'],
+                    required: false,
+                },{
+                    model : db.Favori,
+                    attributes :['actorId', 'userId'],
+                    required: false,
+                },
+            ],
     })
         .then(actors => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
