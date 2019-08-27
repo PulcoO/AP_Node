@@ -44,17 +44,17 @@ module.exports = {
             },
             description: {
                 allowNull: true,
-                type: Sequelize.STRING,
+                type: Sequelize.TEXT,
                 defaultValue:
-                    'Non disponible pour le moment'
+                    'Non disponible pour le moment',
             },
             telephonnumber: {
                 allowNull: true,
-                type: Sequelize.INTEGER
+                type: Sequelize.STRING
             },
             openhours: {
                 allowNull: true,
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             image: {
                 allowNull: true,
