@@ -29,7 +29,6 @@ module.exports = {
                 type: Sequelize.STRING
             },
             cp: {
-                allowNull: true,
                 type: Sequelize.STRING,
                 defaultValue:
                     'Non disponible pour le moment'
@@ -43,7 +42,6 @@ module.exports = {
                 type: Sequelize.STRING
             },
             description: {
-                allowNull: true,
                 type: Sequelize.TEXT,
                 defaultValue:
                     'Non disponible pour le moment',
@@ -57,10 +55,9 @@ module.exports = {
                 type: Sequelize.TEXT
             },
             image: {
-                allowNull: true,
                 type: Sequelize.STRING,
                 defaultValue: 
-                    ''
+                    '"../../../../../assets/imageEntreprises/default-entreprise-image.jpg"'
             },
             createdAt: {
                 allowNull: false,

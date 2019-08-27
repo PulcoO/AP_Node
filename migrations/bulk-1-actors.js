@@ -14,6 +14,7 @@ module.exports = {
             website: 'https://amapom.jimdo.com/',
             description: "“ A ma pomme “ est une Association pour le Maintien d'une Agriculture Paysanne (amap) : depuis septembre 2012 à Lille, elle propose sur abonnement des livraisons hebdomadaires de produits maraîchers.",
             telephonnumber: '',
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             openhours: "Mardi : 18:45-19:45",
             createdAt: new Date(),
             updatedAt: new Date()
@@ -29,6 +30,7 @@ module.exports = {
             website: '',
             description: '',
             telephonnumber: '',
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             openhours: '',
             createdAt: new Date(),
             updatedAt: new Date()
@@ -45,6 +47,7 @@ module.exports = {
             description: "AMAP. Distribution des paniers: Maison Régionale de l'Ecologie et des Solidarités, Mardi 18h - 20h (une semaine sur 2).",
             telephonnumber: '0625895472',
             openhours: 'Lundi: ...',
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -76,7 +79,7 @@ module.exports = {
             description: "fablab",
             telephonnumber: '',
             openhours: '',
-            image: "",
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -108,7 +111,7 @@ module.exports = {
             description: "Nourriture à partager",
             telephonnumber: '',
             openhours: '',
-            image: "",
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -140,7 +143,7 @@ module.exports = {
             description: "Paniers de légumes bio locaux et de saisons, pour étudiants. Prix symbolique pour les étudiants les plus précaires.\nAutres activités : envois de fiches de cuisine et de conservation, visites du Jardin, cinés, prêts.",
             telephonnumber: '',
             openhours: "2 points de dépôts existent :\n- à la fac de droit : permanence chaque mardi de 12h30 à 15h30 dans le hall des amphis.\n- au siège de l'université (42 rue Paul Duez) : chaque mardi à partir de 13h.",
-            image: "",
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -156,7 +159,7 @@ module.exports = {
             description: "Paniers de légumes",
             telephonnumber: '',
             openhours: "Tous les jours 8h-12h et 13h30-17h, d'avril à octobre.",
-            image: "",
+            image:"../../../../../assets/imageEntreprises/default-entreprise-image.jpg",
             createdAt: new Date(),
             updatedAt: new Date()
         },

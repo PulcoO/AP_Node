@@ -69,7 +69,18 @@ exports.actor_getOne = function(req, res) {
     db.Actor.findOne({
             where: {
                 'id': req.params.actorId // params parce que dans l'url
-            }
+            },
+            include: [
+                {
+                    model : db.Category,
+                    attributes: ['id', 'name'],
+                    required: false,
+                },{
+                    model : db.Favori,
+                    attributes :['actorId', 'userId'],
+                    required: false,
+                }
+            ]
         })
         .then(actors => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
