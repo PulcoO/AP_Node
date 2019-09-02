@@ -18,5 +18,8 @@ api.get('/:userId', user_controller.user_getOne);
 //DELETE ONE //
 api.delete('/:userId', user_controller.user_delete);
 
+//update //
+api.put('/:userId', user_controller.user_update)
+
 
 module.exports = api;

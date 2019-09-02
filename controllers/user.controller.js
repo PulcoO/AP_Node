@@ -169,11 +169,44 @@ function user_delete(req, res) {
 
 }
 
+function user_update(req, res) {
+    let password = req.body.password;
+    bcrypt.hash(password, 5, function (err, bcryptedPassword) {
+        db.User.update({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            pseudo: req.body.pseudo,
+            email: req.body.email,
+            birthdate: req.body.birthdate,
+            password: bcryptedPassword,
+            adress: req.body.adress,
+            cp: req.body.cp,
+            city: req.body.city,
+            country: req.body.country,
+
+        }, {
+                where: { 'id': req.params.userId }
+            })
+            .then(user => {
+                res.getHeader('Content-type', 'application/json ; charset=utf-8');
+                res.status(200);
+                res.json(user)
+            })
+            .catch(error => { // detailler l'erreur si plusieurs possibilité
+                res.getHeader('Content-type', 'application/json ; charset=utf-8');
+                res.status(400);
+                console.log('error');
+                res.end();
+            })
+    })
+}
+
 //module exports
 module.exports = {
     user_create,
     user_details,
     user_login,
     user_getOne,
-    user_delete
+    user_delete,
+    user_update
 }
