@@ -14,7 +14,7 @@ api.post('/login', user_controller.user_login);
 api.post('/create', user_controller.user_create);
 
 //READ ONE //
-api.get('/:id', user_controller.user_getOne);
+api.get('/:userId', user_controller.user_getOne);
 //DELETE ONE //
 api.delete('/:userId', user_controller.user_delete);
 

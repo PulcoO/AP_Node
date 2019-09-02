@@ -17,6 +17,7 @@ function user_create(req, res) {
     let cp = req.body.cp;
     let city = req.body.city;
     let country = req.body.country;
+    let roleId = 3;
 
     if (email == null || pseudo == null || password == null) {
         return res.status(400).json({
@@ -25,26 +26,27 @@ function user_create(req, res) {
     }
 
     models.User.findOne({
-            attributes: ["email"],
-            where: {
-                email: email
-            }
-        })
+        attributes: ["email"],
+        where: {
+            email: email
+        }
+    })
         .then(function (userFound) {
             if (!userFound) {
                 bcrypt.hash(password, 5, function (err, bcryptedPassword) {
                     models.User.create({
-                            firstname: firstname,
-                            lastname: lastname,
-                            pseudo: pseudo,
-                            email: email,
-                            birthdate: birthdate,
-                            password: bcryptedPassword,
-                            adress: adress,
-                            cp: cp,
-                            city: city,
-                            country: country,
-                        })
+                        firstname: firstname,
+                        lastname: lastname,
+                        pseudo: pseudo,
+                        email: email,
+                        birthdate: birthdate,
+                        password: bcryptedPassword,
+                        adress: adress,
+                        cp: cp,
+                        city: city,
+                        country: country,
+                        roleId: roleId,
+                    })
                         .then(function (newUser) {
                             return res.status(201).json({
                                 userId: newUser.id
@@ -81,10 +83,10 @@ function user_login(req, res) {
     }
 
     models.User.findOne({
-            where: {
-                email: email
-            }
-        })
+        where: {
+            email: email
+        }
+    })
         .then(function (userFound) {
             if (userFound) {
                 bcrypt.compare(password, userFound.password, function (
@@ -129,11 +131,12 @@ function user_details(req, res) {
 }
 
 function user_getOne(req, res) {
-    db.User.findOne({
-            where: {
-                'id': req.params.userId // params parce que dans l'url
-            }
-        })
+    let id = req.params.userId
+    models.User.findOne({
+        where: {
+            id: id // params parce que dans l'url
+        }
+    })
         .then(users => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
@@ -148,10 +151,10 @@ function user_getOne(req, res) {
 
 function user_delete(req, res) {
     db.User.destroy({
-            where: {
-                'id': req.params.userId // params parce que dans l'url
-            }
-        })
+        where: {
+            'id': req.params.userId // params parce que dans l'url
+        }
+    })
         .then(users => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');
             res.status(200);
