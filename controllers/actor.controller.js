@@ -51,6 +51,21 @@ exports.actor_details = function(req, res) {
                     attributes :['actorId', 'userId'],
                     required: false,
                 },
+                {
+                    model : db.Comment,
+                    required: false,
+                    // include : [
+                    //     {
+                    //         model : db.User,
+                    //         required: false,
+                    //     },
+                    //     {
+                    //         where : {'id' : db.Comment.userId}
+                    //     }
+                        
+                        
+                    // ]
+                }
             ],
     })
         .then(actors => {
@@ -79,6 +94,21 @@ exports.actor_getOne = function(req, res) {
                     model : db.Favori,
                     attributes :['actorId', 'userId'],
                     required: false,
+                },
+                {
+                    model : db.Comment,
+                    required: false,
+                    // include : [
+                    //     {
+                    //         model : db.User,
+                    //         required: false,
+                    //     },
+                    //     {
+                    //         where : {'id' : db.Comment.id}
+                    //     }
+                        
+                        
+                    // ]
                 }
             ]
         })
