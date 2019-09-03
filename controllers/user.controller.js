@@ -7,16 +7,16 @@ let db = require("../models/index");
 function user_create(req, res) {
     console.log(req.body);
     //params
-    let firstname = req.body.firstname;
-    let lastname = req.body.lastname;
+    // let firstname = req.body.firstname;
+    // let lastname = req.body.lastname;
     let pseudo = req.body.pseudo;
     let email = req.body.email;
-    let birthdate = req.body.birthdate;
+    // let birthdate = req.body.birthdate;
     let password = req.body.password;
-    let adress = req.body.adress;
-    let cp = req.body.cp;
-    let city = req.body.city;
-    let country = req.body.country;
+    // let adress = req.body.adress;
+    // let cp = req.body.cp;
+    // let city = req.body.city;
+    // let country = req.body.country;
     let roleId = 3;
 
     if (email == null || pseudo == null || password == null) {
@@ -35,16 +35,16 @@ function user_create(req, res) {
             if (!userFound) {
                 bcrypt.hash(password, 5, function (err, bcryptedPassword) {
                     models.User.create({
-                        firstname: firstname,
-                        lastname: lastname,
+                        // firstname: firstname,
+                        // lastname: lastname,
                         pseudo: pseudo,
                         email: email,
-                        birthdate: birthdate,
+                        // birthdate: birthdate,
                         password: bcryptedPassword,
-                        adress: adress,
-                        cp: cp,
-                        city: city,
-                        country: country,
+                        // adress: adress,
+                        // cp: cp,
+                        // city: city,
+                        // country: country,
                         roleId: roleId,
                     })
                         .then(function (newUser) {
