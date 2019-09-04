@@ -33,14 +33,12 @@ exports.category_details = function(req, res) {
 }
 
 exports.category_details_sort_by_actor = function(req, res) {
-    console.log(req.params.categoryId)
+    let categoryParams= req.params.categoryId.split("-");
+    console.log(categoryParams)
     db.Category.findAll({
-        where : {
-            'id': {
-                [Op.in]: req.params.categoryId.split("-")
-            } 
+        where : {'id': {[Op.in]: categoryParams.split("-")} 
         },
-        include: [actors]
+        include: [{models : db.Actor}]
     })
         .then(categories => {
             res.getHeader('Content-type', 'application/json ; charset=utf-8');

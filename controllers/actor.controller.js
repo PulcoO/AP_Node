@@ -209,7 +209,9 @@ exports.actor_update = function(req, res) {
 ////////////////////////////////////////////////////////////////////////////////
 
 exports.actor_details_sort_by_category_with_favori = function(req, res) {
-    let categoryParams= req.params.categoryId.split("-");
+    //console.log(req.params.categoryId)
+    let categoryParams= req.params.categoryId.split('-');
+    //console.log(categoryParams)
     db.Actor.findAll({
         include: 
             [
@@ -217,7 +219,6 @@ exports.actor_details_sort_by_category_with_favori = function(req, res) {
                     model : db.Category ,
                     where : {'id': {[Op.in]: categoryParams }},
                     attributes :['id', 'name'],
-                    required: false,
                 },{
                     model : db.Favori,
                     attributes :['actorId', 'userId'],
