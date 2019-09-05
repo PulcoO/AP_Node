@@ -96,7 +96,7 @@ function user_login(req, res) {
                     if (resBycrypt) {
                         return res.status(200).json({
                             userId: userFound.id,
-                            token: jwtUtils.generateTokenForUser(userFound)
+                            token: jwtUtils.generateTokenForUser(userFound),
                         });
                     } else {
                         return res.status(403).json({
@@ -201,6 +201,28 @@ function user_update(req, res) {
     })
 }
 
+function user_favoris(req, res) {
+    db.Favori.findAll({
+        where: {
+            'userId': req.params.userId
+        },
+        include: [{
+            model: db.Actor,
+            attributes: ['id', 'name'],
+            required: false,
+        }]
+    })
+        .then(actors => {
+            res.getHeader('Content-type', 'application/json ; charset=utf-8 ')
+            res.status(200);
+            res.json(actors);
+        })
+        .catch(error => {
+            res.json(error);
+            res.end();
+        })
+}
+
 //module exports
 module.exports = {
     user_create,
@@ -208,5 +230,6 @@ module.exports = {
     user_login,
     user_getOne,
     user_delete,
-    user_update
+    user_update,
+    user_favoris
 }

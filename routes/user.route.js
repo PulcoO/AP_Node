@@ -21,5 +21,8 @@ api.delete('/:userId', user_controller.user_delete);
 //update //
 api.put('/:userId', user_controller.user_update)
 
+//user favoris//
+api.get('/favoris/:userId', user_controller.user_favoris)
+
 
 module.exports = api;
