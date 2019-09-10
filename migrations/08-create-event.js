@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       dateend: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       location: {
@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       openhours: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       image: {
@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: ''
       },
-      actorId:{
+      actorId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
