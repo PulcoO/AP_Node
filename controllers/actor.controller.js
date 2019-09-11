@@ -98,17 +98,12 @@ exports.actor_getOne = function(req, res) {
                 {
                     model : db.Comment,
                     required: false,
-                    // include : [
-                    //     {
-                    //         model : db.User,
-                    //         required: false,
-                    //     },
-                    //     {
-                    //         where : {'id' : db.Comment.id}
-                    //     }
-                        
-                        
-                    // ]
+                    include : [
+                        {
+                            model : db.User,
+                            required: false,
+                        },
+                    ]
                 }
             ]
         })
