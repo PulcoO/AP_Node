@@ -213,8 +213,8 @@ exports.actor_details_sort_by_category_with_favori = function(req, res) {
                 {
                     model : db.Category ,
                     where : {'id': {[Op.in]: categoryParams }},
-                    attributes :['id', 'name'],
-                },{
+                },
+                {
                     model : db.Favori,
                     attributes :['actorId', 'userId'],
                     required: false,
